@@ -2,7 +2,7 @@
 Some examples combining streamlit, es, and langchain
 
 
-## Setup
+## Setup for OpenAI
 
 Create a Python virtual environment and install some dependencies
 ```bash
@@ -36,6 +36,15 @@ OPENAI_API_BASE = "https://your_endpoint_url"
 OPENAI_DEPLOYMENT_NAME = "your_deployment_name"
 OPENAI_API_VERSION = "2023-05-15"
 ```
+
+## Setup for HuggingFace Hosted Llama2
+
+You'll need to add some things to the secrest.toml file
+```bash
+HUGGINGFACEHUB_API_TOKEN="hf_YOUR_HUGGING_FACE_KEY"
+LLAMA2_HF_URL="https://YOUR_ENDPOINT_URL.endpoints.huggingface.cloud"
+```
+
 
 
 ## launch

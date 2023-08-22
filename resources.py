@@ -2,6 +2,28 @@ import streamlit as st
 import openai
 from langchain.chat_models import ChatOpenAI
 
+
+import json
+import requests
+
+from text_generation import Client
+
+
+
+@st.cache_resource
+def getLlama2Client():
+    HUGGINGFACEHUB_API_TOKEN = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
+    LLAMA2_HF_URL = st.secrets["LLAMA2_HF_URL"]
+    client = Client(
+        LLAMA2_HF_URL, 
+        headers={
+            "Authorization": f"Bearer {HUGGINGFACEHUB_API_TOKEN}"
+            },
+        timeout=120,
+    )
+    return client
+
+
 @st.cache_resource
 def load_llm():
     openai_type = st.secrets["OPENAI_TYPE"]
