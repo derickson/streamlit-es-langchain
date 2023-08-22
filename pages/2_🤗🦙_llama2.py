@@ -1,7 +1,6 @@
 import streamlit as st
 
-
-from langchain_llama import Llama2LLM
+from resources import load_llama2_llm
 from langchain import LLMChain, ConversationChain
 from langchain.prompts.prompt import PromptTemplate
 from langchain.memory import ConversationBufferWindowMemory
@@ -19,11 +18,20 @@ with col2:
     if st.button("Clear Memory"):
         st.session_state.memory_llama.clear()
 
+
+f"""
+You are chatting with [meta-llama/Llama-2-13b-chat-hf](https://huggingface.co/meta-llama/Llama-2-13b-chat-hf) hosted on HuggingFace Inference Endpoint 🤗\n
+If things are not working, the endpoint may be paused.
+"""
+
 ## Create conversational LLM Chain for Llama2
 if "conversation_llama" not in st.session_state:
-    llm = Llama2LLM()
+    
     template = """<s>[INST] <<SYS>>
-You are a helpful AI Chat assistant. Respond in markdown format without emojis. Answer concisely and don't make up answers. If you don't know the answer just say I don't know. 
+You are a helpful AI Chat assistant. 
+Respond in markdown format without emojis. 
+Answer concisely and don't make up answers. 
+If you don't know the answer just say I don't know. 
 <</SYS>>
 Chat History: {history}
 
@@ -31,7 +39,7 @@ Chat History: {history}
     PROMPT = PromptTemplate(input_variables=["history", "input"], template=template)
     st.session_state.conversation_llama = ConversationChain(
         prompt=PROMPT,
-        llm=llm,
+        llm=load_llama2_llm(),
         verbose=True,
         memory=st.session_state.memory_llama,
     )

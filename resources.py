@@ -1,31 +1,49 @@
 import streamlit as st
 import openai
 from langchain.chat_models import ChatOpenAI
+from langchain.llms import HuggingFaceTextGenInference
 
 
-import json
-import requests
+# import json
+# import requests
 
-from text_generation import Client
-
-
+# from text_generation import Client
 
 @st.cache_resource
-def getLlama2Client():
+def load_llama2_llm():
     HUGGINGFACEHUB_API_TOKEN = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
     LLAMA2_HF_URL = st.secrets["LLAMA2_HF_URL"]
-    client = Client(
-        LLAMA2_HF_URL, 
-        headers={
-            "Authorization": f"Bearer {HUGGINGFACEHUB_API_TOKEN}"
-            },
+
+    headers = {"Authorization": f"Bearer {HUGGINGFACEHUB_API_TOKEN}"}
+    server_kwargs = {"headers": headers}
+    llm = HuggingFaceTextGenInference(
+        inference_server_url = LLAMA2_HF_URL,
+        temperature=0.1,
+        top_k=30,
+        # do_sample=True,
+        max_new_tokens=512,
         timeout=120,
+        server_kwargs = server_kwargs
     )
-    return client
+    return llm
+
+
+# @st.cache_resource
+# def getLlama2Client():
+#     HUGGINGFACEHUB_API_TOKEN = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
+#     LLAMA2_HF_URL = st.secrets["LLAMA2_HF_URL"]
+#     client = Client(
+#         LLAMA2_HF_URL, 
+#         headers={
+#             "Authorization": f"Bearer {HUGGINGFACEHUB_API_TOKEN}"
+#             },
+#         timeout=120,
+#     )
+#     return client
 
 
 @st.cache_resource
-def load_llm():
+def load_openai_llm():
     openai_type = st.secrets["OPENAI_TYPE"]
     print(f"-- Initializing connection to OpenAI with {openai_type}")
     # Set OpenAI API key from Streamlit secrets

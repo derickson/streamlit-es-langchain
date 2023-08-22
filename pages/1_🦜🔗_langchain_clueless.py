@@ -7,7 +7,7 @@ from langchain import ConversationChain
 from langchain.prompts.prompt import PromptTemplate
 from langchain.memory import ConversationBufferWindowMemory
 
-from resources import load_llm
+from resources import load_openai_llm
 
 ## Initialize chat history
 if "memory" not in st.session_state:
@@ -40,7 +40,7 @@ if "conversation" not in st.session_state:
     PROMPT = PromptTemplate(input_variables=["history", "input"], template=template)
     st.session_state.conversation = ConversationChain(
         prompt=PROMPT,
-        llm=load_llm(),
+        llm=load_openai_llm(),
         verbose=True,
         memory=st.session_state.memory,
     )
