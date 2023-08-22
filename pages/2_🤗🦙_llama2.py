@@ -13,15 +13,17 @@ if "memory_llama" not in st.session_state:
 ## Header with a clear memory button
 col1, col2 = st.columns([3,1])
 with col1:
-    st.title('🦜🔗 talking to a 🦙')
+    st.title('Talking to 🦙2 on 🤗')
 with col2:
     if st.button("Clear Memory"):
         st.session_state.memory_llama.clear()
 
 
 f"""
-You are chatting with [meta-llama/Llama-2-13b-chat-hf](https://huggingface.co/meta-llama/Llama-2-13b-chat-hf) hosted on HuggingFace Inference Endpoint 🤗\n
-If things are not working, the endpoint may be paused.
+You are chatting with 
+[meta-llama/Llama-2-13b-chat-hf](https://huggingface.co/meta-llama/Llama-2-13b-chat-hf) 
+hosted on HuggingFace Inference Endpoint 🤗\n
+If things are not working, the endpoint may be paused to save $$.
 """
 
 ## Create conversational LLM Chain for Llama2
