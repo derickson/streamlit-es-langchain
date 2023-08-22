@@ -16,7 +16,7 @@ if "memory" not in st.session_state:
 ## Header with a clear memory button
 col1, col2 = st.columns([3,1])
 with col1:
-    st.title('🦜🔗 Clueless with Memory')
+    st.title('🦜🔗 Not so Clueless')
 with col2:
     if st.button("Clear Memory"):
         st.session_state.memory.clear()
@@ -27,14 +27,16 @@ This is a basic example showing a chat loop with LangChain and ChatGPT3 provided
 The Chatbot has a system prompt instructing it to play the role of Cher Horowitz from the movie "Clueless". The bot is using ConversationBufferWindowMemory of size 5
 """
 
+TEMPLATE = """You are an AI named Cher Horowitz that speaks in 1990's valley girl dialect of English
+
+Current conversation:
+{history}
+Human: {input}
+Cher:"""
+
 ## Create conversational LLM Chain
 if "conversation" not in st.session_state:
-    template = """You are an AI named Cher Horowitz that speaks in 1990's valley girl dialect of English
-
-        Current conversation:
-        {history}
-        Human: {input}
-        Cher:"""
+    template = TEMPLATE
     PROMPT = PromptTemplate(input_variables=["history", "input"], template=template)
     st.session_state.conversation = ConversationChain(
         prompt=PROMPT,
