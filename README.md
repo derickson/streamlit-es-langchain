@@ -1,7 +1,6 @@
 # streamlit-es-langchain
 Some examples combining streamlit, es, and langchain
 
-
 ## Setup for OpenAI
 
 Create a Python virtual environment and install some dependencies
@@ -39,13 +38,14 @@ OPENAI_API_VERSION = "2023-05-15"
 
 ## Setup for HuggingFace Hosted Llama2
 
-You'll need to add some things to the secrest.toml file
+Some pages assume you are hosting llama2 on HuggingFace Inference Endpoints
+Set that up and enter connection details.
+You'll need to add some things to the secrets.toml file
+
 ```bash
 HUGGINGFACEHUB_API_TOKEN="hf_YOUR_HUGGING_FACE_KEY"
 LLAMA2_HF_URL="https://YOUR_ENDPOINT_URL.endpoints.huggingface.cloud"
 ```
-
-
 
 ## launch
 
