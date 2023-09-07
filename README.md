@@ -47,6 +47,15 @@ HUGGINGFACEHUB_API_TOKEN="hf_YOUR_HUGGING_FACE_KEY"
 LLAMA2_HF_URL="https://YOUR_ENDPOINT_URL.endpoints.huggingface.cloud"
 ```
 
+## Setup for Google VertexAI
+
+### steps
+1. downgrade to google 3.9
+2. install gcloud api to host machine
+4. ```pip install google-cloud-aiplatform```
+5. edit google-keys.sh to repalce YOURPROJECT with the name of your google project within to use APIs
+6. run ```bash google-keys.sh``` which will give you a URL to outh into with your browser. This will install the google key files in your user folders.
+
 ## launch
 
 ```bash

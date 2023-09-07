@@ -3,7 +3,7 @@ import openai
 from langchain.chat_models import ChatOpenAI
 from langchain.llms import HuggingFaceTextGenInference
 
-
+from langchain.llms import VertexAI
 
 from elasticsearch import Elasticsearch, helpers
 
@@ -16,10 +16,10 @@ def get_es():
     return Elasticsearch([url], verify_certs=True) 
 
 
-# import json
-# import requests
+@st.cache_resource
+def load_vertexai():
+    return VertexAI()
 
-# from text_generation import Client
 
 @st.cache_resource
 def load_llama2_llm():
