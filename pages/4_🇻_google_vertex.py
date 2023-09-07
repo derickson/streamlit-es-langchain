@@ -22,7 +22,7 @@ with col2:
         st.session_state.memory_google.clear()
 
 f"""
-This is a basic example showing a chat loop with LangChain and Google VertexAI 
+This is a basic example showing a chat loop with LangChain and Google PaLM2 on VertexAI 
 
 """
 
