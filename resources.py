@@ -4,6 +4,18 @@ from langchain.chat_models import ChatOpenAI
 from langchain.llms import HuggingFaceTextGenInference
 
 
+
+from elasticsearch import Elasticsearch, helpers
+
+@st.cache_resource
+def get_es():
+    es_server = st.secrets["GOVES_SERVER"]
+    es_username = st.secrets["GOVES_USERNAME"]
+    es_password = st.secrets["GOVES_PASSWORD"]
+    url = f"https://{es_username}:{es_password}@{es_server}:443"
+    return Elasticsearch([url], verify_certs=True) 
+
+
 # import json
 # import requests
 
